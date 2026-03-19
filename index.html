@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f9f8f6;
+      --light-gray: #f0eeeb;
+      --border: #e4e2dd;
+      --text-primary: #1a1917;
+      --text-secondary: #6b6860;
+      --text-muted: #a09e9a;
+      --accent: #1a1917;
+      --accent-light: #f0eeeb;
+      --teal: #0f6e56;
+      --teal-light: #e1f5ee;
+      --blue: #185fa5;
+      --blue-light: #e6f1fb;
+      --amber: #854f0b;
+      --amber-light: #faeeda;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      color: var(--text-primary);
+      background: var(--white);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5vw;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 5vw; }
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      padding-top: 120px;
+    }
+
+    .hero-inner {
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-light);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--white);
+      padding: 12px 28px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.8; }
+
+    .btn-secondary {
+      color: var(--text-secondary);
+      font-size: 14px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 3rem;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--off-white); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .project-card.color-teal::before { background: var(--teal); }
+    .project-card.color-blue::before { background: var(--blue); }
+    .project-card.color-amber::before { background: var(--amber); }
+
+    .project-card:hover { transform: translateY(-3px); }
+
+    .project-type {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-card.color-teal .project-type { color: var(--teal); }
+    .project-card.color-blue .project-type { color: var(--blue); }
+    .project-card.color-amber .project-type { color: var(--amber); }
+
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      background: var(--light-gray);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .project-link {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .project-link:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem 3rem;
+    }
+
+    .skill-group h4 {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-list li {
+      font-size: 15px;
+      color: var(--text-primary);
+    }
+
+    /* ── CERTIFICATIONS ── */
+    #certifications { background: var(--off-white); }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+      gap: 1rem;
+    }
+
+    .cert-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .cert-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .cert-icon.dc { background: var(--teal-light); }
+    .cert-icon.other { background: var(--blue-light); }
+
+    .cert-info h4 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+
+    .cert-info p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-photo-placeholder {
+      aspect-ratio: 1;
+      background: var(--light-gray);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+
+    .about-links {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .about-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .about-link:hover { color: var(--text-primary); border-color: var(--text-primary); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--text-primary);
+      color: var(--white);
+    }
+
+    #contact .section-label { color: rgba(255,255,255,0.4); }
+    #contact h2 { color: var(--white); margin-bottom: 1rem; }
+
+    .contact-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.6);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-email {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .contact-email:hover { border-color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--text-primary);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 1.5rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    footer a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--border);
+      margin-bottom: 3rem;
+    }
+
+    /* ── RESPONSIVE NAV ── */
+    @media (max-width: 560px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#hero">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Open to opportunities</div>
+      <h1>Data science<br>meets <em>curiosity.</em></h1>
+      <p class="hero-desc">
+        Hi, I'm <strong>Your Name</strong> — a data scientist with a passion for
+        turning complex datasets into clear, actionable insights using statistics,
+        machine learning, and thoughtful visualisation.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#projects">View my work</a>
+        <a class="btn-secondary" href="YOUR_CV_LINK_HERE">Download CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Work</p>
+      <h2>Projects</h2>
+      <div class="projects-grid">
+
+        <!-- PROJECT 1 — DISSERTATION -->
+        <div class="project-card color-teal">
+          <p class="project-type">Dissertation</p>
+          <h3>Your Dissertation Title Here</h3>
+          <p>
+            Brief description of what you investigated, the dataset or method you used,
+            and the key finding or insight. Keep it to 2–3 sentences — what was the
+            problem, what did you do, and what did you find?
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Pandas</span>
+            <span class="tag">Regression</span>
+            <span class="tag">Matplotlib</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="#">GitHub →</a>
+            <a class="project-link" href="#">Read write-up →</a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-card color-blue">
+          <p class="project-type">Data Analysis</p>
+          <h3>Project Two Title</h3>
+          <p>
+            Describe the second project here. What dataset did you use? What question
+            were you trying to answer? What techniques did you apply and what did you
+            discover or build?
+          </p>
+          <div class="tags">
+            <span class="tag">R</span>
+            <span class="tag">ggplot2</span>
+            <span class="tag">Statistical testing</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="#">GitHub →</a>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-card color-amber">
+          <p class="project-type">Machine Learning</p>
+          <h3>Project Three Title</h3>
+          <p>
+            Describe the third project here. Focus on the problem you solved, the model
+            or approach you used, and any measurable outcome — accuracy, insights,
+            business value, etc.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">Scikit-learn</span>
+            <span class="tag">Classification</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="#">GitHub →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Technical</p>
+      <h2>Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <ul class="skill-list">
+            <li>Python</li>
+            <li>R</li>
+            <li>SQL</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4>Libraries & tools</h4>
+          <ul class="skill-list">
+            <li>Pandas &amp; NumPy</li>
+            <li>Scikit-learn</li>
+            <li>Matplotlib / Seaborn</li>
+            <li>ggplot2</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4>Methods</h4>
+          <ul class="skill-list">
+            <li>Regression analysis</li>
+            <li>Statistical hypothesis testing</li>
+            <li>Data wrangling &amp; cleaning</li>
+            <li>Data visualisation</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h4>Platforms</h4>
+          <ul class="skill-list">
+            <li>Jupyter Notebooks</li>
+            <li>Git &amp; GitHub</li>
+            <li>Excel / Google Sheets</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="container">
+      <p class="section-label">Education &amp; credentials</p>
+      <h2>Certifications</h2>
+      <div class="certs-grid">
+
+        <div class="cert-card">
+          <div class="cert-icon dc">📊</div>
+          <div class="cert-info">
+            <h4>DataCamp — [Course Name]</h4>
+            <p>DataCamp · 2024</p>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon dc">📊</div>
+          <div class="cert-info">
+            <h4>DataCamp — [Another Course]</h4>
+            <p>DataCamp · 2024</p>
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon other">🎓</div>
+          <div class="cert-info">
+            <h4>[Your Degree] — [Your University]</h4>
+            <p>Graduated 2024</p>
+          </div>
+        </div>
+
+        <!-- Add more cert cards here as needed -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">Background</p>
+      <h2>About me</h2>
+      <div class="about-grid">
+        <div class="about-photo-placeholder">
+          Add your photo here<br />(replace this div with an &lt;img&gt; tag)
+        </div>
+        <div class="about-text">
+          <p>
+            I'm a recently graduated data scientist based in [Your City], with a
+            background in [Your Degree Subject]. My dissertation focused on
+            [brief topic], where I [what you did].
+          </p>
+          <p>
+            I enjoy working with messy, real-world data and finding the story
+            hiding inside it. I'm currently looking for roles where I can
+            contribute to data-driven decision making while continuing to grow
+            my skills in machine learning and statistical analysis.
+          </p>
+          <p>
+            Outside of data, I [a personal detail — e.g. enjoy hiking, reading,
+            playing guitar — something human and memorable].
+          </p>
+          <div class="about-links">
+            <a class="about-link" href="https://github.com/yourusername" target="_blank">GitHub</a>
+            <a class="about-link" href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+            <a class="about-link" href="YOUR_CV_LINK_HERE">CV / Résumé</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Get in touch</p>
+      <h2>Let's work together.</h2>
+      <p class="contact-sub">
+        I'm actively looking for data science roles and internships. Feel free to reach out.
+      </p>
+      <a class="contact-email" href="mailto:your@email.com">your@email.com</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Your Name</p>
+    <div class="footer-links">
+      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
