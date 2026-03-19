@@ -1,723 +1,173 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Data Scientist</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #ffffff;
-      --off-white: #f9f8f6;
-      --light-gray: #f0eeeb;
-      --border: #e4e2dd;
-      --text-primary: #1a1917;
-      --text-secondary: #6b6860;
-      --text-muted: #a09e9a;
-      --accent: #1a1917;
-      --accent-light: #f0eeeb;
-      --teal: #0f6e56;
-      --teal-light: #e1f5ee;
-      --blue: #185fa5;
-      --blue-light: #e6f1fb;
-      --amber: #854f0b;
-      --amber-light: #faeeda;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 400;
-      color: var(--text-primary);
-      background: var(--white);
-      line-height: 1.7;
-      font-size: 16px;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 5vw;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 18px;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--text-primary); }
-
-    /* ── SECTIONS ── */
-    section { padding: 100px 5vw; }
-    .container { max-width: 900px; margin: 0 auto; }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: var(--white);
-      padding-top: 120px;
-    }
-
-    .hero-inner {
-      max-width: 700px;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--teal);
-      background: var(--teal-light);
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 2rem;
-    }
-
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.8rem, 6vw, 4.5rem);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--text-secondary);
-    }
-
-    .hero-desc {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-      line-height: 1.7;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .btn-primary {
-      background: var(--text-primary);
-      color: var(--white);
-      padding: 12px 28px;
-      border-radius: 4px;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: opacity 0.2s;
-    }
-
-    .btn-primary:hover { opacity: 0.8; }
-
-    .btn-secondary {
-      color: var(--text-secondary);
-      font-size: 14px;
-      text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .btn-secondary:hover { color: var(--text-primary); border-color: var(--text-primary); }
-
-    /* ── SECTION HEADERS ── */
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      color: var(--text-primary);
-      margin-bottom: 3rem;
-    }
-
-    /* ── PROJECTS ── */
-    #projects { background: var(--off-white); }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-    }
-
-    .project-card.color-teal::before { background: var(--teal); }
-    .project-card.color-blue::before { background: var(--blue); }
-    .project-card.color-amber::before { background: var(--amber); }
-
-    .project-card:hover { transform: translateY(-3px); }
-
-    .project-type {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-
-    .project-card.color-teal .project-type { color: var(--teal); }
-    .project-card.color-blue .project-type { color: var(--blue); }
-    .project-card.color-amber .project-type { color: var(--amber); }
-
-    .project-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.3rem;
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.75rem;
-      line-height: 1.3;
-    }
-
-    .project-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      flex: 1;
-      margin-bottom: 1.5rem;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 1.25rem;
-    }
-
-    .tag {
-      font-size: 11px;
-      font-weight: 500;
-      padding: 3px 10px;
-      border-radius: 3px;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      background: var(--light-gray);
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .project-link {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .project-link:hover { color: var(--text-primary); border-color: var(--text-primary); }
-
-    /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem 3rem;
-    }
-
-    .skill-group h4 {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .skill-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .skill-list li {
-      font-size: 15px;
-      color: var(--text-primary);
-    }
-
-    /* ── CERTIFICATIONS ── */
-    #certifications { background: var(--off-white); }
-
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-      gap: 1rem;
-    }
-
-    .cert-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .cert-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .cert-icon.dc { background: var(--teal-light); }
-    .cert-icon.other { background: var(--blue-light); }
-
-    .cert-info h4 {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      margin-bottom: 3px;
-      line-height: 1.3;
-    }
-
-    .cert-info p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    @media (max-width: 640px) {
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    }
-
-    .about-photo-placeholder {
-      aspect-ratio: 1;
-      background: var(--light-gray);
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    .about-text p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-    }
-
-    .about-links {
-      display: flex;
-      gap: 1.25rem;
-      margin-top: 1.75rem;
-      flex-wrap: wrap;
-    }
-
-    .about-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 14px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .about-link:hover { color: var(--text-primary); border-color: var(--text-primary); }
-
-    /* ── CONTACT ── */
-    #contact {
-      background: var(--text-primary);
-      color: var(--white);
-    }
-
-    #contact .section-label { color: rgba(255,255,255,0.4); }
-    #contact h2 { color: var(--white); margin-bottom: 1rem; }
-
-    .contact-sub {
-      font-size: 17px;
-      color: rgba(255,255,255,0.6);
-      max-width: 420px;
-      margin-bottom: 2.5rem;
-    }
-
-    .contact-email {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      color: var(--white);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
-    }
-
-    .contact-email:hover { border-color: var(--white); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--text-primary);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 1.5rem 5vw;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
-
-    footer .footer-links {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    footer a {
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover { color: rgba(255,255,255,0.8); }
-
-    /* ── DIVIDER ── */
-    .section-divider {
-      width: 40px;
-      height: 2px;
-      background: var(--border);
-      margin-bottom: 3rem;
-    }
-
-    /* ── RESPONSIVE NAV ── */
-    @media (max-width: 560px) {
-      .nav-links { display: none; }
-    }
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #125c44; -webkit-text-stroke: #125c44}
+    p.p5 {margin: 0.0px 0.0px 30.0px 0.0px; font: 18.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d}
+    p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff; background-color: #141312}
+    p.p7 {margin: 0.0px 0.0px 6.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88}
+    p.p9 {margin: 0.0px 0.0px 18.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #125c44; -webkit-text-stroke: #125c44}
+    p.p10 {margin: 0.0px 0.0px 9.0px 0.0px; font: 15.6px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312}
+    p.p11 {margin: 0.0px 0.0px 18.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d}
+    p.p12 {margin: 0.0px 0.0px 0.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d; background-color: #eceae6}
+    p.p13 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d}
+    p.p14 {margin: 0.0px 0.0px 18.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #154a94; -webkit-text-stroke: #154a94}
+    p.p15 {margin: 0.0px 0.0px 18.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #713e0c; -webkit-text-stroke: #713e0c}
+    p.p16 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d; background-color: #ffffff}
+    p.p17 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d; background-color: #ffffff; min-height: 16.0px}
+    p.p18 {margin: 0.0px 0.0px 18.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #800080; -webkit-text-stroke: #713e0c}
+    p.p19 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d; min-height: 16.0px}
+    p.p23 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px '.Apple Color Emoji UI'; color: #141312; -webkit-text-stroke: #141312}
+    p.p24 {margin: 0.0px 0.0px 3.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312}
+    p.p25 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88}
+    p.p26 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px '.Apple Color Emoji UI'; color: #141312}
+    p.p27 {margin: 0.0px 0.0px 3.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #141312}
+    p.p28 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #8f8d88; background-color: #ffffff}
+    p.p29 {margin: 0.0px 0.0px 6.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88; min-height: 13.0px}
+    p.p30 {margin: 0.0px 0.0px 6.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88}
+    p.p31 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88}
+    p.p32 {margin: 0.0px 0.0px 12.0px 0.0px; font: 16.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d}
+    p.p33 {margin: 0.0px 0.0px 6.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.4); -webkit-text-stroke: rgba(255, 255, 255, 0.4)}
+    p.p35 {margin: 0.0px 0.0px 30.0px 0.0px; font: 17.0px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.6); -webkit-text-stroke: rgba(255, 255, 255, 0.6)}
+    p.p36 {margin: 0.0px 0.0px 0.0px 0.0px; font: 24.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff}
+    p.p37 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.3); -webkit-text-stroke: rgba(255, 255, 255, 0.3)}
+    p.p38 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Helvetica Neue'; color: #ffffff; color: rgba(255, 255, 255, 0.4); -webkit-text-stroke: rgba(255, 255, 255, 0.4)}
+    li.li2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #58554d; -webkit-text-stroke: #58554d}
+    li.li21 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312}
+    li.li22 {margin: 0.0px 0.0px 0.0px 0.0px; font: 15.0px 'Helvetica Neue'; color: #141312}
+    span.s1 {font-kerning: none; background-color: rgba(255, 255, 255, 0.92)}
+    span.s2 {background-color: rgba(255, 255, 255, 0.92); -webkit-text-stroke: 0px #000000}
+    span.s3 {font-kerning: none; background-color: #daf3ea}
+    span.s4 {font-kerning: none; background-color: #ffffff}
+    span.s5 {font-kerning: none}
+    span.s6 {font-kerning: none; color: #58554d; background-color: #ffffff; -webkit-text-stroke: 0px #58554d}
+    span.s7 {font: 14.0px 'Helvetica Neue'; font-kerning: none; color: #58554d; -webkit-text-stroke: 0px #58554d}
+    span.s8 {font-kerning: none; background-color: #f7f6f4}
+    span.s9 {font: 15.6px 'Helvetica Neue'; font-kerning: none; background-color: #ffffff}
+    span.s10 {-webkit-text-stroke: 0px #000000}
+    span.s11 {font-kerning: none; -webkit-text-stroke: 0px #141312}
+    span.s12 {font-kerning: none; background-color: #e0edfa}
+    span.s13 {font-kerning: none; background-color: #eceae6}
+    span.s14 {font: 16.0px 'Helvetica Neue'; font-kerning: none; color: #141312; -webkit-text-stroke: 0px #141312}
+    span.s15 {font-kerning: none; background-color: #141312}
+    span.s16 {font: 24.0px 'Helvetica Neue'; font-kerning: none; color: #ffffff; -webkit-text-stroke: 0px #ffffff}
+    span.s17 {font: 12.0px 'Helvetica Neue'; font-kerning: none}
+    ul.ul1 {list-style-type: disc}
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="#hero">Your Name</a>
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-inner">
-      <div class="hero-tag">Open to opportunities</div>
-      <h1>Data science<br>meets <em>curiosity.</em></h1>
-      <p class="hero-desc">
-        Hi, I'm <strong>Your Name</strong> — a data scientist with a passion for
-        turning complex datasets into clear, actionable insights using statistics,
-        machine learning, and thoughtful visualisation.
-      </p>
-      <div class="hero-cta">
-        <a class="btn-primary" href="#projects">View my work</a>
-        <a class="btn-secondary" href="YOUR_CV_LINK_HERE">Download CV</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <p class="section-label">Work</p>
-      <h2>Projects</h2>
-      <div class="projects-grid">
-
-        <!-- PROJECT 1 — DISSERTATION -->
-        <div class="project-card color-teal">
-          <p class="project-type">Dissertation</p>
-          <h3>Your Dissertation Title Here</h3>
-          <p>
-            Brief description of what you investigated, the dataset or method you used,
-            and the key finding or insight. Keep it to 2–3 sentences — what was the
-            problem, what did you do, and what did you find?
-          </p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Pandas</span>
-            <span class="tag">Regression</span>
-            <span class="tag">Matplotlib</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="#">GitHub →</a>
-            <a class="project-link" href="#">Read write-up →</a>
-          </div>
-        </div>
-
-        <!-- PROJECT 2 -->
-        <div class="project-card color-blue">
-          <p class="project-type">Data Analysis</p>
-          <h3>Project Two Title</h3>
-          <p>
-            Describe the second project here. What dataset did you use? What question
-            were you trying to answer? What techniques did you apply and what did you
-            discover or build?
-          </p>
-          <div class="tags">
-            <span class="tag">R</span>
-            <span class="tag">ggplot2</span>
-            <span class="tag">Statistical testing</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="#">GitHub →</a>
-          </div>
-        </div>
-
-        <!-- PROJECT 3 -->
-        <div class="project-card color-amber">
-          <p class="project-type">Machine Learning</p>
-          <h3>Project Three Title</h3>
-          <p>
-            Describe the third project here. Focus on the problem you solved, the model
-            or approach you used, and any measurable outcome — accuracy, insights,
-            business value, etc.
-          </p>
-          <div class="tags">
-            <span class="tag">Python</span>
-            <span class="tag">Scikit-learn</span>
-            <span class="tag">Classification</span>
-          </div>
-          <div class="project-links">
-            <a class="project-link" href="#">GitHub →</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="container">
-      <p class="section-label">Technical</p>
-      <h2>Skills</h2>
-      <div class="skills-grid">
-
-        <div class="skill-group">
-          <h4>Languages</h4>
-          <ul class="skill-list">
-            <li>Python</li>
-            <li>R</li>
-            <li>SQL</li>
-          </ul>
-        </div>
-
-        <div class="skill-group">
-          <h4>Libraries & tools</h4>
-          <ul class="skill-list">
-            <li>Pandas &amp; NumPy</li>
-            <li>Scikit-learn</li>
-            <li>Matplotlib / Seaborn</li>
-            <li>ggplot2</li>
-          </ul>
-        </div>
-
-        <div class="skill-group">
-          <h4>Methods</h4>
-          <ul class="skill-list">
-            <li>Regression analysis</li>
-            <li>Statistical hypothesis testing</li>
-            <li>Data wrangling &amp; cleaning</li>
-            <li>Data visualisation</li>
-          </ul>
-        </div>
-
-        <div class="skill-group">
-          <h4>Platforms</h4>
-          <ul class="skill-list">
-            <li>Jupyter Notebooks</li>
-            <li>Git &amp; GitHub</li>
-            <li>Excel / Google Sheets</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CERTIFICATIONS -->
-  <section id="certifications">
-    <div class="container">
-      <p class="section-label">Education &amp; credentials</p>
-      <h2>Certifications</h2>
-      <div class="certs-grid">
-
-        <div class="cert-card">
-          <div class="cert-icon dc">📊</div>
-          <div class="cert-info">
-            <h4>DataCamp — [Course Name]</h4>
-            <p>DataCamp · 2024</p>
-          </div>
-        </div>
-
-        <div class="cert-card">
-          <div class="cert-icon dc">📊</div>
-          <div class="cert-info">
-            <h4>DataCamp — [Another Course]</h4>
-            <p>DataCamp · 2024</p>
-          </div>
-        </div>
-
-        <div class="cert-card">
-          <div class="cert-icon other">🎓</div>
-          <div class="cert-info">
-            <h4>[Your Degree] — [Your University]</h4>
-            <p>Graduated 2024</p>
-          </div>
-        </div>
-
-        <!-- Add more cert cards here as needed -->
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <p class="section-label">Background</p>
-      <h2>About me</h2>
-      <div class="about-grid">
-        <div class="about-photo-placeholder">
-          Add your photo here<br />(replace this div with an &lt;img&gt; tag)
-        </div>
-        <div class="about-text">
-          <p>
-            I'm a recently graduated data scientist based in [Your City], with a
-            background in [Your Degree Subject]. My dissertation focused on
-            [brief topic], where I [what you did].
-          </p>
-          <p>
-            I enjoy working with messy, real-world data and finding the story
-            hiding inside it. I'm currently looking for roles where I can
-            contribute to data-driven decision making while continuing to grow
-            my skills in machine learning and statistical analysis.
-          </p>
-          <p>
-            Outside of data, I [a personal detail — e.g. enjoy hiking, reading,
-            playing guitar — something human and memorable].
-          </p>
-          <div class="about-links">
-            <a class="about-link" href="https://github.com/yourusername" target="_blank">GitHub</a>
-            <a class="about-link" href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-            <a class="about-link" href="YOUR_CV_LINK_HERE">CV / Résumé</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <p class="section-label">Get in touch</p>
-      <h2>Let's work together.</h2>
-      <p class="contact-sub">
-        I'm actively looking for data science roles and internships. Feel free to reach out.
-      </p>
-      <a class="contact-email" href="mailto:your@email.com">your@email.com</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 Your Name</p>
-    <div class="footer-links">
-      <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-    </div>
-  </footer>
-
+<p class="p1"><span class="s1">Kiara Mayhand</span></p>
+<ul class="ul1">
+  <li class="li2"><span class="s2"></span><span class="s1">Projects</span></li>
+  <li class="li2"><span class="s2"></span><span class="s1">Skills</span></li>
+  <li class="li2"><span class="s2"></span><span class="s1">Certifications</span></li>
+  <li class="li2"><span class="s2"></span><span class="s1">About</span></li>
+  <li class="li2"><span class="s2"></span><span class="s1">Contact</span></li>
+</ul>
+<p class="p3"><span class="s3">OPEN TO OPPORTUNITIES</span></p>
+<h1 style="margin: 0.0px 0.0px 18.0px 0.0px; font: 48.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s4">Data science</span><span class="s5"><br>
+</span><span class="s4">meets </span><span class="s6">curiosity.</span></h1>
+<p class="p5"><span class="s4">Hi, I'm Kiara — a research &amp; data scientist with a passion for turning complex health data into clear, actionable insights using statistics, machine learning, and thoughtful visualization.</span></p>
+<p class="p6"><span class="s5">View my work</span></p>
+<p class="p2"><span class="s4"><a href="file:///Users/kiaramayhand/Downloads/YOUR_CV_LINK_HERE">Download CV<span class="s7"></span></a></span></p>
+<p class="p7"><span class="s8">WORK</span></p>
+<h2 style="margin: 0.0px 0.0px 36.0px 0.0px; font: 24.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s8">Projects</span></h2>
+<p class="p9"><span class="s4">DISSERTATION</span></p>
+<h3 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 15.6px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s4">Risks of Major Adverse Kidney Events</span></h3>
+<p class="p11"><span class="s4">Brief description of what you investigated, the dataset or method you used, and the key finding or insight. Keep it to 2–3 sentences — what was the problem, what did you do, and what did you find?</span></p>
+<p class="p12"><span class="s5">R</span></p>
+<p class="p12"><span class="s5">Python</span></p>
+<p class="p12"><span class="s5">Propensity Score Matching</span></p>
+<p class="p12"><span class="s5">Survival analysis</span></p>
+<p class="p13"><span class="s4">GitHub →</span></p>
+<p class="p13"><span class="s4">Read write-up →</span></p>
+<p class="p14"><span class="s4">RWE DATA ANALYSIS</span></p>
+<h3 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 15.6px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s4">Clinical characteristics and CKD care delivery</span></h3>
+<p class="p11"><span class="s4">Describe the second project here. What dataset did you use? What question were you trying to answer? What techniques did you apply and what did you discover or build?</span></p>
+<p class="p12"><span class="s5">R</span></p>
+<p class="p12"><span class="s5">ggplot2</span></p>
+<p class="p12"><span class="s5">Statistical testing</span></p>
+<p class="p13"><span class="s4">GitHub →</span></p>
+<p class="p15"><span class="s4">MACHINE LEARNING</span></p>
+<h3 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 15.6px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s4">Are Machine Learning Methods better than Traditional Methods?</span></h3>
+<p class="p11"><span class="s4">Describe the third project here. Focus on the problem you solved, the model or approach you used, and any measurable outcome — accuracy, insights, business value, etc.</span></p>
+<p class="p12"><span class="s5">Python</span></p>
+<p class="p12"><span class="s5">XGBoost</span></p>
+<p class="p12"><span class="s5">SHAP</span></p>
+<p class="p16"><span class="s5">GitHub →</span></p>
+<p class="p17"><span class="s5"></span><br></p>
+<p class="p18"><span class="s4">RWE DATA ANALYSIS</span></p>
+<p class="p10"><span class="s9">Colorectal Cancer Screening Adherence<span class="Apple-converted-space"> </span></span></p>
+<p class="p11"><span class="s4">Describe the third project here. Focus on the problem you solved, the model or approach you used, and any measurable outcome — accuracy, insights, business value, etc.</span></p>
+<p class="p12"><span class="s5">R</span></p>
+<p class="p12"><span class="s5">LASSO</span></p>
+<p class="p12"><span class="s5">Classification</span></p>
+<p class="p16"><span class="s5">GitHub →</span></p>
+<p class="p19"><span class="s5"></span><br></p>
+<p class="p7"><span class="s5">TECHNICAL</span></p>
+<h2 style="margin: 0.0px 0.0px 36.0px 0.0px; font: 24.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s5">Skills</span></h2>
+<h4 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88"><span class="s5">LANGUAGES</span></h4>
+<ul class="ul1">
+  <li class="li21"><span class="s10"></span><span class="s5">Python</span></li>
+  <li class="li22"><span class="s11">R</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">SQL</span></li>
+</ul>
+<h4 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88"><span class="s5">LIBRARIES &amp; TOOLS</span></h4>
+<ul class="ul1">
+  <li class="li21"><span class="s10"></span><span class="s5">Pandas &amp; NumPy</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Scikit-learn</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Matplotlib / Seaborn</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">ggplot2</span></li>
+</ul>
+<h4 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88"><span class="s5">METHODS</span></h4>
+<ul class="ul1">
+  <li class="li21"><span class="s10"></span><span class="s5">Regression analysis</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Statistical hypothesis testing</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Data wrangling &amp; cleaning</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Data visualisation</span></li>
+</ul>
+<h4 style="margin: 0.0px 0.0px 9.0px 0.0px; font: 11.0px 'Helvetica Neue'; color: #8f8d88; -webkit-text-stroke: #8f8d88"><span class="s5">PLATFORMS</span></h4>
+<ul class="ul1">
+  <li class="li21"><span class="s10"></span><span class="s5">Jupyter Notebooks</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Git &amp; GitHub</span></li>
+  <li class="li21"><span class="s10"></span><span class="s5">Excel / Google Sheets</span></li>
+</ul>
+<p class="p7"><span class="s8">EDUCATION &amp; CREDENTIALS</span></p>
+<h2 style="margin: 0.0px 0.0px 36.0px 0.0px; font: 24.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s8">Certifications</span></h2>
+<p class="p23"><span class="s12">🎓</span></p>
+<p class="p24"><span class="s4">PhD in Social &amp; Behavioral Sciences — Johns Hopkins University</span></p>
+<p class="p25"><span class="s4">Graduated 2025</span></p>
+<p class="p26"><span class="s12">🎓</span></p>
+<p class="p27"><span class="s4">MPH in Epidemiology &amp; Health Analytics — The College of New Jersey<span class="Apple-converted-space"> </span></span></p>
+<p class="p28"><span class="s5">Graduated 2021</span></p>
+<p class="p23"><span class="s3">📊</span></p>
+<h4 style="margin: 0.0px 0.0px 3.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s4">DataCamp — Responsible AI Practices</span></h4>
+<p class="p25"><span class="s4">DataCamp · 2025</span></p>
+<p class="p23"><span class="s3">📊</span></p>
+<h4 style="margin: 0.0px 0.0px 3.0px 0.0px; font: 14.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s4">DataCamp — Understanding Machine Learning<span class="Apple-converted-space"> </span></span></h4>
+<p class="p25"><span class="s4">DataCamp · 2024</span></p>
+<p class="p29"><span class="s5"></span><br></p>
+<p class="p30"><span class="s5">BACKGROUND</span></p>
+<h2 style="margin: 0.0px 0.0px 36.0px 0.0px; font: 24.0px 'Helvetica Neue'; color: #141312; -webkit-text-stroke: #141312"><span class="s5">About me</span></h2>
+<p class="p31"><span class="s13">Add your photo here</span></p>
+<p class="p31"><span class="s13">(replace this div with an &lt;img&gt; tag)</span></p>
+<p class="p32"><span class="s5">I'm a recently graduated data scientist based in [Your City], with a background in [Your Degree Subject]. My dissertation focused on [brief topic], where I [what you did].</span></p>
+<p class="p32"><span class="s5">I enjoy working with messy, real-world data and finding the story hiding inside it. I'm currently looking for roles where I can contribute to data-driven decision making while continuing to grow my skills in machine learning and statistical analysis.</span></p>
+<p class="p32"><span class="s5">Outside of data, I [a personal detail — e.g. enjoy hiking, reading, playing guitar — something human and memorable].</span></p>
+<p class="p2"><span class="s5"><a href="https://github.com/yourusername">GitHub</a></span><span class="s14"> <a href="https://linkedin.com/in/yourusername"><span class="s7">LinkedIn</span></a> <a href="file:///Users/kiaramayhand/Downloads/YOUR_CV_LINK_HERE"><span class="s7">CV / Résumé</span></a></span></p>
+<p class="p33"><span class="s15">GET IN TOUCH</span></p>
+<h2 style="margin: 0.0px 0.0px 12.0px 0.0px; font: 24.0px 'Helvetica Neue'; color: #ffffff; -webkit-text-stroke: #ffffff"><span class="s15">Let's work together.</span></h2>
+<p class="p35"><span class="s15">I'm actively looking for research &amp; data science roles in health tech! Feel free to reach out.</span></p>
+<p class="p36"><span class="s15"><a href="mailto:your@email.com">kiaramayhand@email.com<span class="s16"></span></a></span></p>
+<p class="p37"><span class="s15">© 2025 Kiara Mayhand</span></p>
+<p class="p38"><span class="s15"><a href="https://github.com/yourusername">GitHub<span class="s17"></span></a></span></p>
+<p class="p38"><span class="s15"><a href="https://linkedin.com/in/yourusername">LinkedIn<span class="s17"></span></a></span></p>
 </body>
 </html>
